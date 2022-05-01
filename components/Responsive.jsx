@@ -4,14 +4,34 @@ import { withSize } from "react-sizeme";
 import Widget from "./Widget";
 import AreaChart from "./widgets/widget1";
 
-const originalItems = ["a", "b", "c", "d"];
+
+function getFromLS(key) {
+  let ls = {};
+  if (global.localStorage) {
+    try {
+      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+    } catch (e) {}
+  }
+  return ls[key];
+}
+
+function saveToLS(key, value) {
+  if (global.localStorage) {
+    global.localStorage.setItem(
+      "rgl-8",
+      JSON.stringify({
+        [key]: value
+      })
+    );
+  }
+}
+
+
+const originalItems = ["a"];
 
 const initialLayouts = {
   lg: [
     { w: 6, h: 6, x: 0, y: 0, i: "a", moved: false, static: false },
-    { w: 3, h: 6, x: 9, y: 0, i: "b", moved: false, static: false },
-    { w: 3, h: 6, x: 6, y: 0, i: "c", moved: false, static: false },
-    { w: 12, h: 4, x: 0, y: 6, i: "d", moved: false, static: false }
   ]
 };
 
@@ -66,24 +86,3 @@ function Content({ size: { width } }) {
 }
 
 export default withSize({ refreshMode: "debounce", refreshRate: 60 })(Content);
-
-function getFromLS(key) {
-  let ls = {};
-  if (global.localStorage) {
-    try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
-    } catch (e) {}
-  }
-  return ls[key];
-}
-
-function saveToLS(key, value) {
-  if (global.localStorage) {
-    global.localStorage.setItem(
-      "rgl-8",
-      JSON.stringify({
-        [key]: value
-      })
-    );
-  }
-}

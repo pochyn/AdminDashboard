@@ -1,8 +1,8 @@
-import ResponsiveRGL from '../components/Responsive'
+import Content from '../components/Responsive'
 export default function Home() {
   return (
     <div>
-      <ResponsiveRGL/>      
+      <Content/>      
     </div>
   )
 }

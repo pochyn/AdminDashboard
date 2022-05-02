@@ -4,75 +4,76 @@ import { withSize } from "react-sizeme";
 import Widget from "./Widget";
 import AreaChart from "./widgets/widget1";
 
-
-function getFromLS(key) {
+// for now save to local storage,
+// in the future better save items and layouts in db per user
+const getFromLS = (key) => {
   let ls = {};
   if (global.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(global.localStorage.getItem("rgl")) || {};
     } catch (e) {}
   }
   return ls[key];
-}
+};
 
-function saveToLS(key, value) {
+const saveToLS = (key, value) => {
   if (global.localStorage) {
     global.localStorage.setItem(
-      "rgl-8",
+      "rgl",
       JSON.stringify({
-        [key]: value
+        ...JSON.parse(global.localStorage.getItem("rgl")),
+        [key]: value,
       })
     );
   }
-}
-
+};
 
 const originalItems = ["a"];
 
 const initialLayouts = {
-  lg: [
-    { w: 6, h: 6, x: 0, y: 0, i: "a", moved: false, static: false },
-  ]
+  lg: [{ w: 6, h: 6, x: 0, y: 0, i: "a", moved: false, static: false }],
 };
 
 const componentList = {
   a: AreaChart,
+  b: AreaChart,
 };
-function Content({ size: { width } }) {
-  const [items, setItems] = useState(originalItems);
-  const [layouts, setLayouts] = useState(
-    getFromLS("layouts") || initialLayouts
-  );
+
+const Content = ({ size: { width } }) => {
+  const [items, setItems] = useState(getFromLS("items") || originalItems);
+  const layouts = getFromLS("layouts") || initialLayouts;
+  console.log(layouts);
+
   const onLayoutChange = (_, allLayouts) => {
-    setLayouts(allLayouts);
+    saveToLS("layouts", allLayouts);
   };
-  const onLayoutSave = () => {
-    saveToLS("layouts", layouts);
-  };
+
   const onRemoveItem = (itemId) => {
-    setItems(items.filter((i) => i !== itemId));
+    const newItems = items.filter((i) => i !== itemId);
+    setItems(newItems);
+    saveToLS("items", newItems);
   };
-  const onAddItem = (itemId) => {
-    setItems([...items, itemId]);
+
+  const onDrop = (layout, layoutItem, _event) => {
+    const newItems = [...items, "b"];
+    setItems(newItems);
+    saveToLS("items", newItems);
   };
 
   return (
     <>
       <ResponsiveGridLayout
-        className="layout"
         layouts={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        cols={{ lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 }}
         rowHeight={60}
         width={width}
         onLayoutChange={onLayoutChange}
+        isDroppable={true}
+        onDrop={onDrop}
       >
         {items.map((key) => (
-          <div
-            key={key}
-            className="widget"
-            data-grid={{ w: 3, h: 2, x: 0, y: Infinity }}
-          >
+          <div key={key} data-grid={{ w: 6, h: 6, x: 0, y: Infinity }}>
             <Widget
               id={key}
               onRemoveItem={onRemoveItem}
@@ -83,6 +84,6 @@ function Content({ size: { width } }) {
       </ResponsiveGridLayout>
     </>
   );
-}
+};
 
 export default withSize({ refreshMode: "debounce", refreshRate: 60 })(Content);

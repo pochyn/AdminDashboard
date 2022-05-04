@@ -1,16 +1,15 @@
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
+import Header from "./Header";
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
-const AppLayout = ({ children }) => {
+const HeaderLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const triggerCollapsed = () => {
@@ -67,17 +66,7 @@ const AppLayout = ({ children }) => {
         />
       </Sider>
       <Layout>
-        <Header
-          style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 1,
-          }}
-        >
-          <div style={{ marginLeft: "-40px" }} onClick={triggerCollapsed}>
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </div>
-        </Header>
+        <Header triggerCollapsed={triggerCollapsed} collapsed={collapsed} />
         <Content
           style={{
             minHeight: 280,
@@ -90,4 +79,4 @@ const AppLayout = ({ children }) => {
   );
 };
 
-export default AppLayout;
+export default HeaderLayout;

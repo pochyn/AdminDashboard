@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
-import AreaChart from "./widgets/widget1";
+import AreaChart from "./widgets/folder1/widget1";
 import WidgetWrapper from "./WidgetWrapper";
 
 // for now save to local storage,
@@ -29,9 +29,8 @@ const saveToLS = (key, value) => {
 };
 
 const originalItems = ["a"];
-
 const initialLayouts = {
-  lg: [{ w: 6, h: 6, x: 0, y: 0, i: "a", moved: false, static: false }],
+  lg: [{ w: 14, h: 8, x: 0, y: 0, i: "a", moved: false, static: false }],
 };
 
 const componentList = {
@@ -65,12 +64,15 @@ const DashboardResponsive = ({ size: { width } }) => {
       <ResponsiveGridLayout
         layouts={layouts}
         breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 }}
-        rowHeight={60}
+        cols={{ lg: 50, md: 35, sm: 20, xs: 10, xxs: 5 }}
+        rowHeight={30}
         width={width}
         onLayoutChange={onLayoutChange}
         isDroppable={true}
         onDrop={onDrop}
+        style={{
+          minHeight: "80vh",
+        }}
       >
         {items.map((key) => (
           <div key={key} data-grid={{ w: 6, h: 6, x: 0, y: Infinity }}>

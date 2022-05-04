@@ -1,10 +1,6 @@
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
+import items from "../components/widgets";
 import Header from "./Header";
 
 const { Sider, Content } = Layout;
@@ -42,34 +38,37 @@ const HeaderLayout = ({ children }) => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: (
-                <div draggable={true} unselectable="on">
-                  <UserOutlined />
-                </div>
-              ),
-              label: "nav 1",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
-            },
-          ]}
+          items={
+            //   [
+            //   {
+            //     key: "1",
+            //     icon: (
+            //       <div draggable={true} unselectable="on">
+            //         <UserOutlined />
+            //       </div>
+            //     ),
+            //     label: "nav 1",
+            //   },
+            //   {
+            //     key: "2",
+            //     icon: <VideoCameraOutlined />,
+            //     label: "nav 2",
+            //   },
+            //   {
+            //     key: "3",
+            //     icon: <UploadOutlined />,
+            //     label: "nav 3",
+            //   },
+            // ]
+            items
+          }
         />
       </Sider>
       <Layout>
         <Header triggerCollapsed={triggerCollapsed} collapsed={collapsed} />
         <Content
           style={{
-            minHeight: 280,
+            minHeight: "80vh",
           }}
         >
           {children}

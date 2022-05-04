@@ -4,7 +4,7 @@ import { ResponsiveContainer } from "recharts";
 export default function Chart() {
   return (
     <ResponsiveContainer width="99%" height="99%">
-      <div>check</div>
+      <div>widget1</div>
     </ResponsiveContainer>
   );
 }

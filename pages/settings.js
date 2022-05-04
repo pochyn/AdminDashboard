@@ -2,9 +2,7 @@ import HeaderLayout from '../layouts/HeaderLayout';
 
 export default function Settings() {
   return (
-    <div>
-        
-    </div>
+    <div></div>
   )
 }
 

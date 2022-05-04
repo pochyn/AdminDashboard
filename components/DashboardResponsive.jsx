@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
-import Widget from "./Widget";
 import AreaChart from "./widgets/widget1";
+import WidgetWrapper from "./WidgetWrapper";
 
 // for now save to local storage,
 // in the future better save items and layouts in db per user
@@ -39,7 +39,7 @@ const componentList = {
   b: AreaChart,
 };
 
-const Content = ({ size: { width } }) => {
+const DashboardResponsive = ({ size: { width } }) => {
   const [items, setItems] = useState(getFromLS("items") || originalItems);
   const layouts = getFromLS("layouts") || initialLayouts;
   console.log(layouts);
@@ -74,7 +74,7 @@ const Content = ({ size: { width } }) => {
       >
         {items.map((key) => (
           <div key={key} data-grid={{ w: 6, h: 6, x: 0, y: Infinity }}>
-            <Widget
+            <WidgetWrapper
               id={key}
               onRemoveItem={onRemoveItem}
               component={componentList[key]}
@@ -86,4 +86,6 @@ const Content = ({ size: { width } }) => {
   );
 };
 
-export default withSize({ refreshMode: "debounce", refreshRate: 60 })(Content);
+export default withSize({ refreshMode: "debounce", refreshRate: 60 })(
+  DashboardResponsive
+);

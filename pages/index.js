@@ -1,14 +1,13 @@
-import Content from '../components/Responsive';
+import DashboardResponsive from '../components/DashboardResponsive';
 import HeaderSiderLayout from '../layouts/HeaderSiderLayout';
 
 export default function Home() {
   return (
     <div>
-      <Content/>      
+      <DashboardResponsive/>      
     </div>
   )
 }
-
 
 Home.getLayout = function getLayout(page) {
   return (

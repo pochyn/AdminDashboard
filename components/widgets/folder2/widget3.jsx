@@ -1,18 +1,18 @@
 import React from "react";
 import { ResponsiveContainer } from "recharts";
 
-const Widget2 = () => {
+const Widget3 = () => {
   return (
     <ResponsiveContainer width="99%" height="99%">
-      <div>widget2</div>
+      <div>widget3</div>
     </ResponsiveContainer>
   );
 };
 
 const chartWidget = {
-  component: <Widget2 />,
-  key: "chart2",
-  label: "Chart 2",
+  component: <Widget3 />,
+  key: "chart3",
+  label: "Chart 3",
 };
 
 export default chartWidget;

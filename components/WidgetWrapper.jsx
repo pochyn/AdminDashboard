@@ -2,7 +2,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import React from "react";
 
-export default function Widget({ id, onRemoveItem, component: Item }) {
+const WidgetWrapper = ({ id, onRemoveItem, component }) => {
   return (
     <Card
       style={{
@@ -26,8 +26,10 @@ export default function Widget({ id, onRemoveItem, component: Item }) {
           flexGrow: 1,
         }}
       >
-        <Item />
+        {component}
       </div>
     </Card>
   );
-}
+};
+
+export default WidgetWrapper;

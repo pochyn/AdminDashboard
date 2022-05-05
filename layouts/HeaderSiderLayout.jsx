@@ -1,9 +1,18 @@
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
-import items from "../components/widgets";
+import widgets from "../components/widgets/widgets";
 import Header from "./Header";
 
 const { Sider, Content } = Layout;
+
+const getItem = (label, key, icon, children) => {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  };
+};
 
 const HeaderLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -11,6 +20,23 @@ const HeaderLayout = ({ children }) => {
   const triggerCollapsed = () => {
     setCollapsed(!collapsed);
   };
+
+  const items = Object.keys(widgets).map((folder) => {
+    const currentFolder = widgets[folder];
+    return getItem(
+      currentFolder.label,
+      currentFolder.key,
+      currentFolder.icon,
+      currentFolder.items.map((item) =>
+        getItem(
+          <div draggable={true} unselectable="on">
+            {item.label}
+          </div>,
+          item.key
+        )
+      )
+    );
+  });
 
   return (
     <Layout hasSider>
@@ -38,30 +64,7 @@ const HeaderLayout = ({ children }) => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={
-            //   [
-            //   {
-            //     key: "1",
-            //     icon: (
-            //       <div draggable={true} unselectable="on">
-            //         <UserOutlined />
-            //       </div>
-            //     ),
-            //     label: "nav 1",
-            //   },
-            //   {
-            //     key: "2",
-            //     icon: <VideoCameraOutlined />,
-            //     label: "nav 2",
-            //   },
-            //   {
-            //     key: "3",
-            //     icon: <UploadOutlined />,
-            //     label: "nav 3",
-            //   },
-            // ]
-            items
-          }
+          items={items}
         />
       </Sider>
       <Layout>

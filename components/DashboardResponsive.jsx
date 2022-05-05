@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
-import AreaChart from "./widgets/folder1/widget1";
+import widgets from "./widgets/widgets";
 import WidgetWrapper from "./WidgetWrapper";
 
 // for now save to local storage,
@@ -28,15 +28,29 @@ const saveToLS = (key, value) => {
   }
 };
 
-const originalItems = ["a"];
+const allWidgets = Object.keys(widgets).flatMap(
+  (folder) => widgets[folder].items
+);
+
+const originalItems = [allWidgets[0]?.key];
 const initialLayouts = {
-  lg: [{ w: 14, h: 8, x: 0, y: 0, i: "a", moved: false, static: false }],
+  lg: [
+    {
+      w: 14,
+      h: 8,
+      x: 0,
+      y: 0,
+      i: allWidgets[0]?.key,
+      moved: false,
+      static: false,
+    },
+  ],
 };
 
-const componentList = {
-  a: AreaChart,
-  b: AreaChart,
-};
+const componentList = allWidgets.reduce(
+  (object, item) => ({ ...object, [item.key]: item.component }),
+  {}
+);
 
 const DashboardResponsive = ({ size: { width } }) => {
   const [items, setItems] = useState(getFromLS("items") || originalItems);
@@ -54,6 +68,7 @@ const DashboardResponsive = ({ size: { width } }) => {
   };
 
   const onDrop = (layout, layoutItem, _event) => {
+    console.log("****** layoutItem", layoutItem);
     const newItems = [...items, "b"];
     setItems(newItems);
     saveToLS("items", newItems);

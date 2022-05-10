@@ -68,7 +68,6 @@ const DashboardResponsive = ({ size: { width } }) => {
   };
 
   const onDrop = (layout, layoutItem, _event) => {
-    console.log("****** layoutItem", layoutItem);
     const newItems = [...items, "b"];
     setItems(newItems);
     saveToLS("items", newItems);

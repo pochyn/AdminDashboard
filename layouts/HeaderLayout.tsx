@@ -7,7 +7,7 @@ const { Content } = Layout;
 const HeaderLayout = ({ children }) => {
   return (
     <Layout>
-      <Header />
+      <Header triggerCollapsed={null} collapsed={null}/>
       <Content
         style={{
           minHeight: 280,

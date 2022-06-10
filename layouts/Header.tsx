@@ -5,7 +5,7 @@ import React from "react";
 
 const headerItems = [
   { key: 1, page: "/", title: "Dashboard" },
-  { key: 2, page: "/settings", title: "Settingsssssss" },
+  { key: 2, page: "/settings", title: "Settings" },
 ];
 
 const Header = ({ triggerCollapsed, collapsed }) => {

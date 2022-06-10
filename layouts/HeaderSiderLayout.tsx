@@ -5,7 +5,7 @@ import Header from "./Header";
 
 const { Sider, Content } = Layout;
 
-const getItem = (label, key, icon, children) => {
+const getItem = (label, key, icon=null, children=null) => {
   return {
     key,
     icon,

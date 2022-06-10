@@ -28,36 +28,22 @@ const saveToLS = (key, value) => {
   }
 };
 
+// get all possible widgets
 const allWidgets = Object.keys(widgets).flatMap(
   (folder) => widgets[folder].items
 );
-
-const originalItems = [allWidgets[0]?.key];
-const initialLayouts = {
-  lg: [
-    {
-      w: 14,
-      h: 8,
-      x: 0,
-      y: 0,
-      i: allWidgets[0]?.key,
-      moved: false,
-      static: false,
-    },
-  ],
-};
-
 const componentList = allWidgets.reduce(
   (object, item) => ({ ...object, [item.key]: item.component }),
   {}
 );
 
 const DashboardResponsive = ({ size: { width } }) => {
-  const [items, setItems] = useState(getFromLS("items") || originalItems);
-  const layouts = getFromLS("layouts") || initialLayouts;
+  const [items, setItems] = useState(getFromLS("items") || []);
+  const layouts = getFromLS("layouts") || { lg: [] };
   console.log(layouts);
 
   const onLayoutChange = (_, allLayouts) => {
+    console.log("***** _", _);
     saveToLS("layouts", allLayouts);
   };
 
@@ -68,9 +54,12 @@ const DashboardResponsive = ({ size: { width } }) => {
   };
 
   const onDrop = (layout, layoutItem, _event) => {
-    const newItems = [...items, "b"];
-    setItems(newItems);
-    saveToLS("items", newItems);
+    const widgetId = _event.dataTransfer.getData("widgetId");
+    if (!items.includes(widgetId)) {
+      const newItems = [...items, widgetId];
+      setItems(newItems);
+      saveToLS("items", newItems);
+    }
   };
 
   return (
@@ -89,7 +78,7 @@ const DashboardResponsive = ({ size: { width } }) => {
         }}
       >
         {items.map((key) => (
-          <div key={key} data-grid={{ w: 6, h: 6, x: 0, y: Infinity }}>
+          <div key={key} data-grid={{ w: 14, h: 10, x: 0, y: Infinity }}>
             <WidgetWrapper
               id={key}
               onRemoveItem={onRemoveItem}

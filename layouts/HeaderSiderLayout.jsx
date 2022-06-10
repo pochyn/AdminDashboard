@@ -29,7 +29,11 @@ const HeaderLayout = ({ children }) => {
       currentFolder.icon,
       currentFolder.items.map((item) =>
         getItem(
-          <div draggable={true} unselectable="on">
+          <div
+            draggable={true}
+            unselectable="on"
+            onDragStart={(e) => e.dataTransfer.setData("widgetId", item.key)}
+          >
             {item.label}
           </div>,
           item.key

@@ -1,5 +1,7 @@
 import React from "react";
 import { ResponsiveContainer } from "recharts";
+import { Widget } from '../../../utils/types';
+
 
 const Widget2 = () => {
   return (
@@ -9,7 +11,7 @@ const Widget2 = () => {
   );
 };
 
-const chartWidget = {
+const chartWidget: Widget = {
   component: <Widget2 />,
   key: "chart2",
   label: "Chart 2",

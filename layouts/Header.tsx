@@ -1,11 +1,10 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import Link from "next/link";
-import React from "react";
 
 const headerItems = [
   { key: 1, page: "/", title: "Dashboard" },
-  { key: 2, page: "/settings", title: "Settings" },
+  { key: 2, page: "/settings", title: "Settings :)" },
 ];
 
 const Header = ({ triggerCollapsed, collapsed }) => {

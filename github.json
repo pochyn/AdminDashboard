@@ -29,7 +29,7 @@
         "memoryReservation": 256,
         "volumesFrom": [],
         "stopTimeout": null,
-        "image": "883846757755.dkr.ecr.us-east-1.amazonaws.com/dashboard-tool:4e2e5e494e4122a5a81bad59832ce152229398b9",
+        "image": "883846757755.dkr.ecr.us-east-1.amazonaws.com/dashboard-tool:106fa609eb5b614fb249a66e022fd4eee0c00938",
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,
@@ -56,7 +56,7 @@
       "EXTERNAL",
       "EC2"
     ],
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:883846757755:task-definition/deplo-dashboard-tool:6",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:883846757755:task-definition/deplo-dashboard-tool:5",
     "family": "deplo-dashboard-tool",
     "requiresAttributes": [
       {
@@ -79,7 +79,7 @@
     "networkMode": "bridge",
     "runtimePlatform": null,
     "cpu": "256",
-    "revision": 6,
+    "revision": 5,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
     "proxyConfiguration": null,

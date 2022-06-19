@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const headerItems = [
   { key: 1, page: "/", title: "Dashboard" },
-  { key: 2, page: "/settings", title: "Settingszzz123" },
+  { key: 2, page: "/settings", title: "Settings123" },
 ];
 
 const Header = ({ triggerCollapsed, collapsed }) => {

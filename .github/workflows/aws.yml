@@ -36,9 +36,6 @@ env:
   ECR_REPOSITORY: dashboard-tool # set this to your Amazon ECR repository name
   ECS_SERVICE: deplo-dashboard-tool # set this to your Amazon ECS service name
   ECS_CLUSTER: maslo-deploy # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION:
-    ./github.json # set this to the path to your Amazon ECS task definition
-    # file, e.g. .aws/task-definition.json
   CONTAINER_NAME:
     dashboard-tool # set this to the name of the container in the
     # containerDefinitions section of your task definition
@@ -79,12 +76,15 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition aws ecs describe-task-definition --task-definition > task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          task-definition: task-definition.json
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 

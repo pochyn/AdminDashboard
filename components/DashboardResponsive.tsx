@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import { withSize } from "react-sizeme";
 import widgets from "./widgets/widgets";
@@ -43,7 +43,6 @@ const DashboardResponsive = ({ size: { width } }) => {
   console.log(layouts);
 
   const onLayoutChange = (_, allLayouts) => {
-    console.log("***** _", _);
     saveToLS("layouts", allLayouts);
   };
 

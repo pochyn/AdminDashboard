@@ -5,6 +5,7 @@ import Link from "next/link";
 const headerItems = [
   { key: 1, page: "/", title: "Dashboard" },
   { key: 2, page: "/settings", title: "Settings" },
+  { key: 2, page: "http://ec2-34-207-133-136.compute-1.amazonaws.com:3000/d/mVRXr-mGz/host-dashboard-system?orgId=1", title: "Monitoring" },
 ];
 
 const Header = ({ triggerCollapsed, collapsed }) => {
